@@ -1,70 +1,52 @@
-#include "loader.h"
-#include "Configuration/Config.h"
-#include "Player.h"
-#include "Creature.h"
-#include "AccountMgr.h"
-#include "ScriptMgr.h"
-#include "Define.h"
-#include "GossipDef.h"
+#include "who_logged.h"
 
-class WhoLoggedAnnounce : public PlayerScript
+void WhoLoggedAnnounce::OnLogin(Player* player)
 {
-public:
-    WhoLoggedAnnounce() : PlayerScript("WhoLoggedAnnounce") { }
-
-    void OnLogin(Player* player)
+    if (!sConfigMgr->GetOption<bool>("PlayerAnnounce", true))
     {
-        std::string playerIP = player->GetSession()->GetRemoteAddress();
-        std::string playerName = player->GetName();
-        uint32 pAccountID = player->GetSession()->GetAccountId();
-        uint32 pLevel = player->getLevel();
-        std::string pClass;
-        std::ostringstream message;
-
-        if (!sConfigMgr->GetOption<bool>("PlayerAnnounce", true))
-        {
-            return;
-        }
-
-        switch (player->getClass())
-        {
-            case CLASS_WARLOCK:
-                pClass = "Warlock";
-                break;
-            case CLASS_WARRIOR:
-                pClass = "Warrior";
-                break;
-            case CLASS_MAGE:
-                pClass = "Mage";
-                break;
-            case CLASS_SHAMAN:
-                pClass = "Shaman";
-                break;
-            case CLASS_DEATH_KNIGHT:
-                pClass = "Death Knight";
-                break;
-            case CLASS_DRUID:
-                pClass = "Druid";
-                break;
-            case CLASS_HUNTER:
-                pClass = "Hunter";
-                break;
-            case CLASS_PALADIN:
-                pClass = "Paladin";
-                break;
-            case CLASS_ROGUE:
-                pClass = "Rogue";
-                break;
-            case CLASS_PRIEST:
-                pClass = "Priest";
-                break;
-        }
-
-        LOG_INFO("module", "Player '{}' has logged in : Level '{}' : Class '{}' : IP '{}' : AccountID '{}'", playerName.c_str(), pLevel, pClass.c_str(), playerIP.c_str(), pAccountID);
+        return;
     }
-};
 
-void AddWhoLoggedScripts()
-{
-    new WhoLoggedAnnounce();
+    std::string playerIP = player->GetSession()->GetRemoteAddress();
+    std::string playerName = player->GetName();
+    uint32 playerAccountID = player->GetSession()->GetAccountId();
+    uint32 playerLevel = player->GetLevel();
+    std::string playerClass;
+    std::ostringstream message;
+
+    switch (player->getClass())
+    {
+        case CLASS_WARLOCK:
+            playerClass = "Warlock";
+            break;
+        case CLASS_WARRIOR:
+            playerClass = "Warrior";
+            break;
+        case CLASS_MAGE:
+            playerClass = "Mage";
+            break;
+        case CLASS_SHAMAN:
+            playerClass = "Shaman";
+            break;
+        case CLASS_DEATH_KNIGHT:
+            playerClass = "Death Knight";
+            break;
+        case CLASS_DRUID:
+            playerClass = "Druid";
+            break;
+        case CLASS_HUNTER:
+            playerClass = "Hunter";
+            break;
+        case CLASS_PALADIN:
+            playerClass = "Paladin";
+            break;
+        case CLASS_ROGUE:
+            playerClass = "Rogue";
+            break;
+        case CLASS_PRIEST:
+            playerClass = "Priest";
+            break;
+    }
+
+    LOG_INFO("module", "Player '{}' has logged in : Level '{}' : Class '{}' : IP '{}' : AccountID '{}'", playerName.c_str(), std::to_string(playerLevel), playerClass.c_str(), playerIP.c_str(), playerAccountID);
 }
