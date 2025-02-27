@@ -1,17 +1,19 @@
-#include "Configuration/Config.h"
-#include "Player.h"
-#include "Creature.h"
 #include "AccountMgr.h"
-#include "ScriptMgr.h"
+#include "Configuration/Config.h"
+#include "Creature.h"
 #include "Define.h"
 #include "GossipDef.h"
+#include "Player.h"
+#include "ScriptMgr.h"
 
 class WhoLoggedAnnounce : public PlayerScript
 {
 public:
-    WhoLoggedAnnounce() : PlayerScript("WhoLoggedAnnounce") {}
+    WhoLoggedAnnounce() : PlayerScript("WhoLoggedAnnounce", {
+        PLAYERHOOK_ON_LOGIN
+    }) {}
 
-    void OnLogin(Player* player) override;
+    void OnPlayerLogin(Player* player) override;
 };
 
 void AddWhoLoggedScripts()
