@@ -1,11 +1,9 @@
 #include "who_logged.h"
 
-void WhoLoggedAnnounce::OnLogin(Player* player)
+void WhoLoggedAnnounce::OnPlayerLogin(Player* player)
 {
     if (!sConfigMgr->GetOption<bool>("PlayerAnnounce", true))
-    {
         return;
-    }
 
     std::string playerIP = player->GetSession()->GetRemoteAddress();
     std::string playerName = player->GetName();
