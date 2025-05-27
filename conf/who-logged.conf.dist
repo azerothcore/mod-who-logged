@@ -1,14 +1,14 @@
 [worldserver]
 
 #
-#   PlayerllLoginAnnounce
+#   PlayerLoginAnnounce
 #       Description: This will show the console on what players are logged in
 #       Default: 1
 #       Value:
 #           1 (Enabled)
 #           0 (Disabled)
 #
-#PlayerLogoutAnnounce
+#.  PlayerLogoutAnnounce
 #       Description: This will show the console on what players are logged out
 #       Default: 0
 #       Value:
