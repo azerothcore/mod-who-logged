@@ -48,6 +48,7 @@ void WhoLoggedAnnounce::OnPlayerLogin(Player* player)
 
     LOG_INFO("module", "Player '{}' has logged in : Level '{}' : Class '{}' : IP '{}' : AccountID '{}'", playerName.c_str(), std::to_string(playerLevel), playerClass.c_str(), playerIP.c_str(), playerAccountID);
 }
+
 void WhoLoggedAnnounce::OnPlayerLogout(Player* player)
 {
     if (!sConfigMgr->GetOption<bool>("PlayerLogoutAnnounce", true))
