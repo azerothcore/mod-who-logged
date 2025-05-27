@@ -2,7 +2,7 @@
 
 void WhoLoggedAnnounce::OnPlayerLogin(Player* player)
 {
-    if (!sConfigMgr->GetOption<bool>("PlayerAnnounce", true))
+    if (!sConfigMgr->GetOption<bool>("PlayerLoginAnnounce", true))
         return;
 
     std::string playerIP = player->GetSession()->GetRemoteAddress();
@@ -50,7 +50,7 @@ void WhoLoggedAnnounce::OnPlayerLogin(Player* player)
 }
 void WhoLoggedAnnounce::OnPlayerLogout(Player* player)
 {
-    if (!sConfigMgr->GetOption<bool>("PlayerAnnounce", true))
+    if (!sConfigMgr->GetOption<bool>("PlayerLogoutAnnounce", true))
         return;
 
     std::string playerIP = player->GetSession()->GetRemoteAddress();
