@@ -48,3 +48,15 @@ void WhoLoggedAnnounce::OnPlayerLogin(Player* player)
 
     LOG_INFO("module", "Player '{}' has logged in : Level '{}' : Class '{}' : IP '{}' : AccountID '{}'", playerName.c_str(), std::to_string(playerLevel), playerClass.c_str(), playerIP.c_str(), playerAccountID);
 }
+void WhoLoggedAnnounce::OnPlayerLogout(Player* player)
+{
+    if (!sConfigMgr->GetOption<bool>("PlayerAnnounce", true))
+        return;
+
+    std::string playerIP = player->GetSession()->GetRemoteAddress();
+    std::string playerName = player->GetName();
+    uint32 playerAccountID = player->GetSession()->GetAccountId();
+    std::ostringstream message;
+
+    LOG_INFO("module", "Player '{}' has logged out : IP '{}' : AccountID '{}'", playerName.c_str(), playerIP.c_str(), playerAccountID);
+}
