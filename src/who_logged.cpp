@@ -60,6 +60,7 @@ void WhoLoggedAnnounce::OnPlayerLogout(Player* player)
 		uint32 playerAccountID = session->GetAccountId();
        		std::string playerName = player->GetName();
 		uint32 playerAccountID = session->GetAccountId();
+		std::ostringstream message;
 
         	LOG_INFO("module", "Player '{}' has logged out : IP '{}' : AccountID '{}'", playerName.c_str(), playerIP.c_str(), playerAccountID);
 	}
