@@ -54,10 +54,13 @@ void WhoLoggedAnnounce::OnPlayerLogout(Player* player)
     if (!sConfigMgr->GetOption<bool>("PlayerLogoutAnnounce", true))
         return;
 
-    std::string playerIP = player->GetSession()->GetRemoteAddress();
-    std::string playerName = player->GetName();
-    uint32 playerAccountID = player->GetSession()->GetAccountId();
-    std::ostringstream message;
+    if (WorldSession* session = player->GetSession())
+    {
+	    std::string playerIP = session->GetRemoteAddress();
+        uint32 playerAccountID = session->GetAccountId();
+        std::string playerName = player->GetName();
+        uint32 playerAccountID = session->GetAccountId();
 
-    LOG_INFO("module", "Player '{}' has logged out : IP '{}' : AccountID '{}'", playerName.c_str(), playerIP.c_str(), playerAccountID);
+        LOG_INFO("module", "Player '{}' has logged out : IP '{}' : AccountID '{}'", playerName.c_str(), playerIP.c_str(), playerAccountID);
+    }
 }
