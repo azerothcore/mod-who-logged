@@ -56,7 +56,7 @@ void WhoLoggedAnnounce::OnPlayerLogout(Player* player)
 
     if (WorldSession* session = player->GetSession())
     {
-	    std::string playerIP = session->GetRemoteAddress();
+	std::string playerIP = session->GetRemoteAddress();
         uint32 playerAccountID = session->GetAccountId();
         std::string playerName = player->GetName();
         uint32 playerAccountID = session->GetAccountId();
