@@ -59,7 +59,6 @@ void WhoLoggedAnnounce::OnPlayerLogout(Player* player)
             std::string playerIP = session->GetRemoteAddress();
             uint32 playerAccountID = session->GetAccountId();
             std::string playerName = player->GetName();
-            uint32 playerAccountID = session->GetAccountId();
 	
             LOG_INFO("module", "Player '{}' has logged out : IP '{}' : AccountID '{}'", playerName.c_str(), playerIP.c_str(), playerAccountID);
         }
